@@ -1,5 +1,8 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Map;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -49,7 +52,8 @@ public class App {
                         System.out.println("Seleccione una opción:");
                         System.out.println("1. Calcular IMC");
                         System.out.println("2. Reservar clase de Zumba");
-                        System.out.println("3. Salir");
+                        System.out.println("3. Ver clases reservadas");
+                        System.out.println("4. Salir");
 
                         System.out.print("Ingrese su opción: ");
                         int opcionMenu = scanner.nextInt();
@@ -61,38 +65,37 @@ public class App {
                         } else if (opcionMenu == 2) {
                             // Código para reservar clase de Zumba
                             System.out.println("Horarios disponibles para la clase de Zumba:");
-                            System.out.println("1. Lunes 18:00 - 19:00");
-                            System.out.println("2. Martes 20:00 - 21:00");
-                            System.out.println("3. Miércoles 17:00 - 18:00");
-                            System.out.println("4. Jueves 19:00 - 20:00");
-                            System.out.println("5. Viernes 16:00 - 17:00");
+                            HashMap<Integer, String> horarios = new HashMap<>();
+                            horarios.put(1, "Lunes 18:00 - 19:00");
+                            horarios.put(2, "Martes 20:00 - 21:00");
+                            horarios.put(3, "Miércoles 17:00 - 18:00");
+                            horarios.put(4, "Jueves 19:00 - 20:00");
+                            horarios.put(5, "Viernes 16:00 - 17:00");
+
+                            System.out.println("Horarios disponibles para la clase de Zumba:");
+                            for (Map.Entry<Integer, String> entry : horarios.entrySet()) {
+                                System.out.println(entry.getKey() + ". " + entry.getValue());
+                            }
 
                             System.out.print("Seleccione un horario: ");
                             int opcionHorario = scanner.nextInt();
 
-                            switch (opcionHorario) {
-                                case 1:
-                                    System.out.println("Ha reservado la clase de Zumba para el Lunes de 18:00 a 19:00");
-                                    break;
-                                case 2:
-                                    System.out.println("Ha reservado la clase de Zumba para el Martes de 20:00 a 21:00");
-                                    break;
-                                case 3:
-                                    System.out.println("Ha reservado la clase de Zumba para el Miércoles de 17:00 a 18:00");
-                                    break;
-                                case 4:
-                                    System.out.println("Ha reservado la clase de Zumba para el Jueves de 19:00 a 20:00");
-                                    break;
-                                case 5:
-                                    System.out.println("Ha reservado la clase de Zumba para el Viernes de 16:00 a 17:00");
-                                    break;
-                                default:
-                                    System.out.println("Opción inválida. Por favor, seleccione un horario válido.");
-                                    break;
+                            if (horarios.containsKey(opcionHorario)) {
+                                String horarioSeleccionado = horarios.get(opcionHorario);
+                                horarios.remove(opcionHorario);
+                                System.out.println("Ha reservado la clase de Zumba para " + horarioSeleccionado);
+                            } else {
+                                System.out.println("Opción inválida. Por favor, seleccione un horario válido.");
                             }
                         } else if (opcionMenu == 3) {
+                            // Código para ver clases reservadas
+                            System.out.println("Clases reservadas:");
+                            for (Map.Entry<Integer, String> entry : horarios.entrySet()) {
+                                System.out.println(entry.getKey() + ". " + entry.getValue());
+                            }
+                        } else if (opcionMenu == 4) {
                             System.out.println("Saliendo del programa...");
-                            salir=false;
+                            salir = false;
                             break;
                         } else {
                             System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
